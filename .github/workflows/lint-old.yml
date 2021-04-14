@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name : master base sha
+      id : master_base_sha
+      if : github.ref  == 'refs/heads/master'
+      run: echo  "::set-output name=base_sha::${{ github.event.before }}"
+    - uses: xcoo/clj-lint-action@v1.1.6
+      with:
+        linters: "[\"clj-kondo\" \"kibit\" \"eastwood\"]"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        runner: ":leiningen"
+        base_sha: ${{ github.event.pull_request.base.sha||steps.master_base_sha.outputs.base_sha }}
+        eastwood_linters: "[:all]"
+
