@@ -1,7 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
 name: reviewdog
-on: [pull_request]
+on: [pull_request,push]
 jobs:
   rubocop:
     name: runner / rubocop
