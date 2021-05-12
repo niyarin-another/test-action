@@ -13,7 +13,7 @@ jobs:
         with:
           ruby-version: 3.0.0
       - name: rubocop
-        uses: reviewdog/action-rubocop@v1
+        uses: reviewdog/action-rubocop@v1.8.3
         with:
           rubocop_version: gemfile
           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
